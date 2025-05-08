@@ -16,7 +16,7 @@ HEADERS = {
     )
 }
 
-url ="https://freewebcart.com/category/provider/udemy-coupon/"
+base_url ="https://freewebcart.com/category/provider/udemy-coupon/"
 
 #fwc stands for freewebcart
 fwc_base_urls =[]
@@ -31,17 +31,17 @@ def get_soup(url:str):
 
 """
 #for debugging
-re = requests.get(url,headers=HEADERS)
+re = requests.get(base_url,headers=HEADERS)
 with open("freewebcart.txt","wb") as f:
     f.write(re.content)
 """
 
-count =0
 limit =10
 for i in range(1,limit+1):
     url_pt2 = f"page/{i}/"
+    url=base_url
     if i>1:
-        url = url+url_pt2
+        url = base_url+url_pt2
     soup = get_soup(url)
         
     #this gets only the link objects inside the square grid
