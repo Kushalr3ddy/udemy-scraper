@@ -19,10 +19,10 @@ HEADERS = {
     )
 }
 
-base_url ="https://freewebcart.com/category/provider/udemy-coupon/"
+base_url ="https://www.coursecouponz.com/"
 
-#fwc stands for freewebcart
-fwc_base_urls =[]
+#cc stands for coursecouponz
+cc_base_urls =[]
 titles=[]
 coupon_links =[]
 coupons =[]
@@ -50,41 +50,38 @@ for i in range(1,limit+1):
     soup = get_soup(url)
         
     #this gets only the link objects inside the square grid
-    raw_links = soup.find_all("div",attrs={'class':'wp-block-group is-layout-flow wp-block-group-is-layout-flow'})[0]
-
-
-    #links = [link.get("href") for link in raw_links]
-    #to get the actual links
-    links = [link["href"] for link in raw_links.find_all('a',href=True)]
-    #print('\n'.join(links))
-
+    raw_links = soup.find_all("a",attrs={'class':'elementor-button elementor-button-link elementor-size-sm'})
+    print(raw_links)
+    print([link['href'] for link in raw_links])
+    links = [link["href"] for link in raw_links]
     for link in links:
         currentPageSoup = get_soup(link)
         timestamps.append(dt.datetime.now())
 
         #check if the page contains the coupon code
-        IsUdemyCoupon = currentPageSoup.find(string="Get On Udemy")
+        IsUdemyCoupon = currentPageSoup.find(string="GET ON UDEMY")
         if IsUdemyCoupon:
             #append to coupon_links list which contains all links containing the udemy url
             coupon_links.append(link)
 
-            coupon_link = currentPageSoup.find_all('a',attrs={'class':'eb-button-anchor'})
-            coupons.append(coupon_link[0].get('href'))
+            coupon_link = currentPageSoup.find_all('a',attrs={'class':'elementor-button elementor-button-link elementor-size-sm'})
+            if coupon_link:
+                coupons.append(coupon_link[0].get('href'))
+            else:
+                coupons.append(None)
             
-            fwc_base_urls.append(url)
+            cc_base_urls.append(url)
             titles.append(currentPageSoup.title.string)
         else:
             coupon_links.append(None)
             coupons.append(None)
             
-            fwc_base_urls.append(url)
+            cc_base_urls.append(url)
             titles.append(currentPageSoup.title.string)
-            
-    #print(coupon_links)
 
-#creating the dataframe
+
 raw_data = {
-    "fwc_link" : pd.Series(fwc_base_urls),
+    "idc_link" : pd.Series(cc_base_urls),
     "course_titles": pd.Series(titles),
     "coupon_links":pd.Series(coupon_links),
     "coupon_url":pd.Series(coupons),
@@ -95,4 +92,4 @@ scraped_layer = pd.DataFrame(raw_data)
 if not os.path.exists("raw_layer"):
     os.mkdir("raw_layer")
 
-scraped_layer.to_csv("raw_layer/freewebcart.csv")
+scraped_layer.to_csv("raw_layer/coursecouponz.csv")
