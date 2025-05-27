@@ -1,5 +1,6 @@
 .vscode
 venv/
+*pycache*
 *.exe
 sites.txt
 udemy.txt
