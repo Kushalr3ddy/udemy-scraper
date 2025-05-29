@@ -90,4 +90,4 @@ def scrape_cc():
     if not os.path.exists("raw_layer"):
         os.mkdir("raw_layer")
 
-    scraped_layer.to_csv("raw_layer/coursecouponz.csv")
+    scraped_layer.to_csv("raw_layer/coursecouponz.csv",mode="a")

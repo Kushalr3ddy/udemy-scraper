@@ -92,4 +92,4 @@ def scrape_fwc():
     if not os.path.exists("raw_layer"):
         os.mkdir("raw_layer")
 
-    scraped_layer.to_csv("raw_layer/freewebcart.csv")
+    scraped_layer.to_csv("raw_layer/freewebcart.csv",mode="a")

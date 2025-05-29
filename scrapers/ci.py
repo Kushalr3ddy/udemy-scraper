@@ -88,4 +88,4 @@ def scrape_ci():
     if not os.path.exists("raw_layer"):
         os.mkdir("raw_layer")
 
-    scraped_layer.to_csv("raw_layer/coursesimplodays.csv")
+    scraped_layer.to_csv("raw_layer/coursesimplodays.csv",mode="a")

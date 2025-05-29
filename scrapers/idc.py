@@ -80,4 +80,4 @@ def scrape_idc():
     if not os.path.exists("raw_layer"):
         os.mkdir("raw_layer")
 
-    scraped_layer.to_csv("raw_layer/idownloadcoupon.csv")
+    scraped_layer.to_csv("raw_layer/idownloadcoupon.csv",mode="a")
