@@ -85,7 +85,7 @@ def scrape_ci():
 
     }
     scraped_layer = pd.DataFrame(raw_data)
-    if not os.path.exists("raw_layer"):
-        os.mkdir("raw_layer")
+    
+    os.mkdirs("raw_layer",exists_ok=True)
 
     scraped_layer.to_csv("raw_layer/coursesimplodays.csv",mode="a")

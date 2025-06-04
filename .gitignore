@@ -11,3 +11,4 @@ fwc_test.py
 test.py
 *.html
 *.json
+.env
