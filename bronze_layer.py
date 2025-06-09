@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from glob import glob
 import psycopg2
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 
 
@@ -40,7 +40,9 @@ def create_table(cursor):
     CREATE TABLE IF NOT EXISTS {TABLE_NAME} ({','.join(col_list)});
 
     """
-    cursor.execute(create_query)
+    create_query = create_query.strip().strip('\n')
+
+    cursor.execute(text(create_query))
     return f"executed {create_query}"
 
 
@@ -77,5 +79,6 @@ def clean_all_raw_files():
 
 if __name__ == "__main__":
     os.makedirs(CLEANED_FOLDER, exist_ok=True)
+    create_table(conn)
     clean_all_raw_files()
     conn.close()

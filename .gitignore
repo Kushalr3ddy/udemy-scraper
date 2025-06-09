@@ -12,3 +12,5 @@ test.py
 *.html
 *.json
 .env
+bronze_layer/*.csv
+logs

@@ -32,6 +32,6 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy your script
-COPY fwc.py fwc.py
+COPY . .
 
-CMD ["python", "fwc.py"]
+CMD ["python", "raw_layer.py"]
