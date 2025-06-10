@@ -88,6 +88,6 @@ def scrape_cc():
     }
     scraped_layer = pd.DataFrame(raw_data)
     
-    os.mkdirs("raw_layer",exists_ok=True)
+    os.mkdir("raw_layer",exists_ok=True)
 
     scraped_layer.to_csv("raw_layer/coursecouponz.csv",mode="a")
