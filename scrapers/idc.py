@@ -78,6 +78,6 @@ def scrape_idc():
     }
     scraped_layer = pd.DataFrame(raw_data)
     
-    os.makedirs("raw_layer",exists_ok=True)
+    os.makedirs("raw_layer",exist_ok=True)
 
     scraped_layer.to_csv("raw_layer/idownloadcoupon.csv",mode="a")
