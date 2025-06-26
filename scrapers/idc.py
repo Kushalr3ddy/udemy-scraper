@@ -8,6 +8,7 @@ import pandas as pd
 from functools import lru_cache
 import datetime as dt
 import os
+import notify
 
 HEADERS = {
     "User-Agent": (

@@ -7,6 +7,7 @@ import pandas as pd
 from functools import lru_cache
 import datetime as dt
 import os
+import notify
 
 HEADERS = {
     "User-Agent": (
@@ -88,8 +89,13 @@ def scrape_fwc():
         "timestamps":pd.Series(timestamps)
 
     }
+    
     scraped_layer = pd.DataFrame(raw_data)
     
     os.makedirs("raw_layer",exist_ok=True)
 
     scraped_layer.to_csv("raw_layer/freewebcart.csv",mode="a")
+
+if __name__ == "__main__":
+    scrape_fwc()
+        

@@ -14,3 +14,4 @@ test.py
 .env
 bronze_layer/*.csv
 logs
+temp/
