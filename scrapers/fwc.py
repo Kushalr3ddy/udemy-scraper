@@ -48,12 +48,12 @@ def scrape_fwc():
         soup = get_soup(url)
 
         #this gets only the link objects inside the square grid
-        raw_links = soup.find_all("div",attrs={'class':'wp-block-group is-layout-flow wp-block-group-is-layout-flow'})[0]
+        raw_links = soup.find_all("a",attrs={'class':'cs-overlay-link'})#[0]
 
 
         #links = [link.get("href") for link in raw_links]
         #to get the actual links
-        links = [link["href"] for link in raw_links.find_all('a',href=True)]
+        links = [link["href"] for link in raw_links]#.find_all('a',href=True)]
         #print('\n'.join(links))
 
         for link in links:
@@ -61,13 +61,15 @@ def scrape_fwc():
             timestamps.append(dt.datetime.now())
 
             #check if the page contains the coupon code
-            IsUdemyCoupon = currentPageSoup.find(string="Get On Udemy")
-            if IsUdemyCoupon:
+            udemy_coupon = currentPageSoup.find('div',attrs={'style':'text-align: center;margin: 20px 0'})
+            
+            if udemy_coupon:
                 #append to coupon_links list which contains all links containing the udemy url
                 coupon_links.append(link)
 
-                coupon_link = currentPageSoup.find_all('a',attrs={'class':'eb-button-anchor'})
+                coupon_link = currentPageSoup.find_all('a',attrs={'rel':'nofollow noopener'})
                 coupons.append(coupon_link[0].get('href'))
+                #coupons.append(coupon_link.get('href'))
 
                 fwc_base_urls.append(url)
                 titles.append(currentPageSoup.title.string)
