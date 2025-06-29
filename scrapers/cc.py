@@ -8,7 +8,7 @@ import pandas as pd
 from functools import lru_cache
 import datetime as dt
 import os
-import notify
+from . import notify
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
